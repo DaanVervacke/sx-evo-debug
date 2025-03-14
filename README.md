@@ -18,7 +18,7 @@ Starting sx-evo-debug...
 - [x] Supports your favorite CANable (or CANable clone)
 - [x] Filter traffic on a specific module
 - [x] Filter traffic on a specific output
-- [ ] Only show traffic from the Dobiss webserver
+- [ ] Only show traffic from the DOBISS webserver
 
 ### Build
 
