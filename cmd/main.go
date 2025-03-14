@@ -12,9 +12,9 @@ import (
 )
 
 func main() {
-	interfaceFlag := flag.String("interface", "can0", "a native native can interface (default=can0)")
-	moduleFlag := flag.String("module", "", "the letter of the dobiss module that you want to filter on")
-	outputFlag := flag.Int("output", 0, "the number of the output on your relaismodule that you want to filter on")
+	interfaceFlag := flag.String("interface", "can0", "a native can interface (default=can0)")
+	moduleFlag := flag.String("module", "", "the letter of the DOBISS module that you want to filter by")
+	outputFlag := flag.Int("output", 0, "the number of the output on your relay module that you want to filter by")
 
 	flag.Parse()
 
