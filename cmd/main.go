@@ -18,7 +18,10 @@ func main() {
 
 	flag.Parse()
 
-	validateFlags(*moduleFlag, *outputFlag)
+	err := validateFlags(*moduleFlag, *outputFlag)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	connection, err := socketcan.DialContext(context.Background(), "can", *interfaceFlag)
 	if err != nil {
@@ -51,16 +54,18 @@ func main() {
 	}
 }
 
-func validateFlags(moduleFlag string, outputFlag int) {
+func validateFlags(moduleFlag string, outputFlag int) error {
 	if len(moduleFlag) > 1 || (len(moduleFlag) == 1 && !unicode.IsLetter(rune(moduleFlag[0]))) {
-		log.Fatal(fmt.Errorf("module flag must be a single letter of the alphabet"))
+		return fmt.Errorf("module flag must be a single letter of the alphabet")
 	}
 
 	if moduleFlag == "" && outputFlag != 0 {
-		log.Fatal(fmt.Errorf("the module flag is required when the output flag is specified"))
+		return fmt.Errorf("the module flag is required when the output flag is specified")
 	}
 
 	if outputFlag != 0 && (outputFlag < 1 || outputFlag > 12) {
-		log.Fatal(fmt.Errorf("invalid output flag value (1-12 is allowed)"))
+		return fmt.Errorf("invalid output flag value (1-12 is allowed)")
 	}
+
+	return nil
 }
