@@ -9,8 +9,10 @@ Bringing up can0 interface...
 Setting txqueuelen to 1000...
 CAN interface setup completed successfully
 Starting sx-evo-debug...
-2025/03/14 19:13:55 | Module A | Output 4 | ID 16842496 | 00 41 03 00 
-2025/03/14 19:13:55 | Module A | Output 4 | ID 16842496 | 00 41 03 01
+2025/03/22 11:44:04 INFO received can frame module=G output=5 id=16842496 data=00470400
+2025/03/22 11:44:04 INFO received can frame module=E output=7 id=16842496 data=00450600
+2025/03/22 11:44:05 INFO received can frame module=G output=1 id=16842496 data=00470000
+2025/03/22 11:44:05 INFO received can frame module=E output=7 id=16842496 data=00450600
 ```
 
 ### Features
