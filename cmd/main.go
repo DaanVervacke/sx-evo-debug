@@ -46,7 +46,7 @@ func main() {
 			var builder strings.Builder
 
 			for _, dataByte := range frameData {
-				_, err := fmt.Fprintf(&builder, "%02x ", dataByte)
+				_, err := fmt.Fprintf(&builder, "%02x", dataByte)
 				if err != nil {
 					slog.Error("something went wrong while parsing CAN data",
 						"error", err)
@@ -59,7 +59,7 @@ func main() {
 					"module", string(frameData[1]),
 					"output", frameData[2]+1,
 					"id", frame.ID,
-					"message", builder.String())
+					"data", builder.String())
 			}
 		}
 	}
