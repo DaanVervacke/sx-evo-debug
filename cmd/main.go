@@ -4,7 +4,8 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"log"
+	"log/slog"
+	"os"
 	"strings"
 	"unicode"
 
@@ -20,12 +21,16 @@ func main() {
 
 	err := validateFlags(*moduleFlag, *outputFlag)
 	if err != nil {
-		log.Fatal(err)
+		slog.Error("something went wrong while validating flags",
+			"error", err)
+		os.Exit(1)
 	}
 
 	connection, err := socketcan.DialContext(context.Background(), "can", *interfaceFlag)
 	if err != nil {
-		log.Fatal(err)
+		slog.Error("something went wrong while connecting to CAN interface",
+			"error", err)
+		os.Exit(1)
 	}
 
 	receiver := socketcan.NewReceiver(connection)
@@ -43,12 +48,18 @@ func main() {
 			for _, dataByte := range frameData {
 				_, err := fmt.Fprintf(&builder, "%02x ", dataByte)
 				if err != nil {
-					log.Fatal(err)
+					slog.Error("something went wrong while parsing CAN data",
+						"error", err)
+					os.Exit(1)
 				}
 			}
 
 			if builder.Len() > 0 {
-				log.Printf("| Module %s | Output %d | ID %d | %s", string(frameData[1]), frameData[2]+1, frame.ID, builder.String())
+				slog.Info("received can frame",
+					"module", string(frameData[1]),
+					"output", frameData[2]+1,
+					"id", frame.ID,
+					"message", builder.String())
 			}
 		}
 	}
