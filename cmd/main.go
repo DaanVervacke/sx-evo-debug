@@ -22,14 +22,14 @@ func main() {
 	err := validateFlags(*moduleFlag, *outputFlag)
 	if err != nil {
 		slog.Error("something went wrong while validating flags",
-			"error", err)
+			"details", err)
 		os.Exit(1)
 	}
 
 	connection, err := socketcan.DialContext(context.Background(), "can", *interfaceFlag)
 	if err != nil {
 		slog.Error("something went wrong while connecting to CAN interface",
-			"error", err)
+			"details", err)
 		os.Exit(1)
 	}
 
@@ -49,7 +49,7 @@ func main() {
 				_, err := fmt.Fprintf(&builder, "%02x", dataByte)
 				if err != nil {
 					slog.Error("something went wrong while parsing CAN data",
-						"error", err)
+						"details", err)
 					os.Exit(1)
 				}
 			}
