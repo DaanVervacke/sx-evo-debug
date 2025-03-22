@@ -1,6 +1,6 @@
 ## sx-evo-debug
 
-A lightweight Dockerized toolkit for debugging CAN traffic on the Dobiss SX Evolution
+A lightweight Dockerized toolkit for debugging CAN traffic on the DOBISS SX Evolution
 
 ```bash
 Starting CAN interface setup...
